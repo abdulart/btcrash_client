@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import 'nes.css/css/nes.css';
 import App from './App.vue';
 import router from './router';
 
