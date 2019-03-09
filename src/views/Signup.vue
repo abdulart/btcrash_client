@@ -104,6 +104,7 @@
             .then((res) => {
               localStorage.token = res.token;
               this.signingUp = false;
+              this.$store.commit('setUser',res);
               this.$router.push('dashboard');
             })
             .catch((err) => {

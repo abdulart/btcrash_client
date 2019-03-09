@@ -16,7 +16,7 @@
 
             </ul>
             <form @submit.prevent="logout" class="form-inline my-2 my-lg-0">
-              <span class="navbar-brand">Зига, {{user.email}}<button class="btn btn-warning ml-3">Выйти</button></span>
+              <span class="navbar-brand"><kbd>{{user.rub}} rub.</kbd> {{user.email}}<button class="btn btn-warning ml-3">Выйти</button></span>
             </form>
           </div>
         </div>
@@ -35,9 +35,11 @@
     components: {
       Header
     },
-    data: () => ({
-      user: {},
-    }),
+    computed: {
+      user () {
+        return this.$store.state.user;
+      },
+    },
     mounted() {
       fetch(API_URL, {
         headers: {
@@ -47,8 +49,9 @@
         .then(res => res.json())
         .then(res => {
           if(res.user) {
-            this.user = res.user;
+            this.$store.commit('setUser', res.user);
           } else {
+            this.$store.commit('setUser', {});
             localStorage.removeItem('token');
             this.$router.push('login');
           }
@@ -56,6 +59,7 @@
     },
     methods: {
       logout() {
+        this.$store.commit('setUser', {});
         localStorage.removeItem('token');
         this.$router.push('login');
       },
