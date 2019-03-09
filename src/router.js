@@ -4,6 +4,8 @@ import Home from './views/Home.vue';
 import Signup from './views/Signup.vue';
 import Login from './views/Login.vue';
 import Dashboard from './views/Dashboard.vue';
+import Addfunds from './views/Addfunds.vue';
+import Crash from './views/Crash.vue';
 
 Vue.use(Router);
 
@@ -48,6 +50,12 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
+      beforeEnter: isLoggedIn,
+    },
+    {
+      path: '/crash',
+      name: 'crash',
+      component: Crash,
       beforeEnter: isLoggedIn,
     },
   ],

@@ -15,8 +15,7 @@
           v-model="user.password"
           type="password" id="password" class="nes-input" required>
       </div>
-      <img v-if="loggingIn" class="spinner" src="../assets/spinner.svg"/>
-      <button v-else type="submit" class="nes-btn">Войти</button>
+      <button type="submit" class="btn btn-primary"><img v-if="loggingIn" class="spinner" src="../assets/spinner.svg"/><span v-else>Войти</span></button>
     </form>
   </div>
 </template>
@@ -107,7 +106,7 @@
   }
 
   .spinner {
-    height: 100px;
-    width: 100px;
+    height: 18px;
+    width: 18px;
   }
 </style>
