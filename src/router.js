@@ -5,6 +5,7 @@ import Signup from './views/Signup.vue';
 import Login from './views/Login.vue';
 import Dashboard from './views/Dashboard.vue';
 import Addfunds from './views/Addfunds.vue';
+import Notfound from './views/Notfound.vue';
 import Crash from './views/Crash.vue';
 
 Vue.use(Router);
@@ -58,5 +59,15 @@ export default new Router({
       component: Crash,
       beforeEnter: isLoggedIn,
     },
+    {
+      path: '/addfunds',
+      name: 'addfunds',
+      component: Addfunds,
+      beforeEnter: isLoggedIn,
+    },
+    {
+      path: '*',
+      component: Notfound,
+    }
   ],
 });

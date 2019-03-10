@@ -16,13 +16,16 @@
 
             </ul>
             <form @submit.prevent="logout" class="form-inline my-2 my-lg-0">
-              <span class="navbar-brand"><kbd>{{user.rub}} rub.</kbd> {{user.email}}<button class="btn btn-warning ml-3">Выйти</button></span>
+              <span class="navbar-brand"><kbd>{{user.rub}} rub</kbd> {{user.email}}<button class="btn btn-warning ml-3">Выйти</button></span>
             </form>
           </div>
         </div>
       </nav>
     </div>
-    <router-view/>
+    <router-view
+      v-on:stopGame="stopGame"
+      v-bind:user="user"
+    />
   </div>
 </template>
 
@@ -39,29 +42,39 @@
       user () {
         return this.$store.state.user;
       },
+      routerProps() {
+        return {
+          user: this.$store.state.user,
+        }
+      }
     },
     mounted() {
-      fetch(API_URL, {
-        headers: {
-          authorization: `Bearer ${localStorage.token}`,
-        },
-      })
-        .then(res => res.json())
-        .then(res => {
-          if(res.user) {
-            this.$store.commit('setUser', res.user);
-          } else {
-            this.$store.commit('setUser', {});
-            localStorage.removeItem('token');
-            this.$router.push('login');
-          }
-        });
+      if(this.$route.fullPath !== '/signup') {
+        fetch(API_URL, {
+          headers: {
+            authorization: `Bearer ${localStorage.token}`,
+          },
+        })
+          .then(res => res.json())
+          .then(res => {
+            if (res.user) {
+              this.$store.commit('setUser', res.user);
+            } else {
+              this.$store.commit('setUser', {});
+              localStorage.removeItem('token');
+              this.$router.push('login');
+            }
+          });
+      }
     },
     methods: {
       logout() {
         this.$store.commit('setUser', {});
         localStorage.removeItem('token');
         this.$router.push('login');
+      },
+      stopGame(){
+        console.log(123);
       },
     },
   }
@@ -72,5 +85,16 @@
   }
   .mb-30 {
     margin-bottom: 30px;
+  }
+  .font1 {
+    font-family: 'Kelly Slab', cursive;
+  }
+
+  .font2 {
+    font-family: 'Spectral SC', serif;
+  }
+
+  .font3 {
+    font-family: 'Vollkorn SC', serif;
   }
 </style>
