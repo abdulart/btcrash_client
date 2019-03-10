@@ -11,7 +11,7 @@ import Crash from './views/Crash.vue';
 Vue.use(Router);
 
 function loggedInRedirect(to, from, next) {
-  if(localStorage.token) {
+  if (localStorage.token) {
     next('/dashboard');
   } else {
     next();
@@ -19,7 +19,7 @@ function loggedInRedirect(to, from, next) {
 }
 
 function isLoggedIn(to, from, next) {
-  if(localStorage.token) {
+  if (localStorage.token) {
     next();
   } else {
     next('/login');
@@ -68,6 +68,6 @@ export default new Router({
     {
       path: '*',
       component: Notfound,
-    }
+    },
   ],
 });

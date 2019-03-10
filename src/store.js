@@ -1,21 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
   },
   mutations: {
     setUser(state, user) {
-      state.user = user;
+      this.state.user = user;
     },
     setMoney(state, money) {
-      state.user.rub = money;
+      this.state.user.rub = money;
     },
   },
   actions: {
 
   },
-})
+});
